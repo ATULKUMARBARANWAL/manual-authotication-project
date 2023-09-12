@@ -19,6 +19,8 @@ app.use(expressLayouts);
 //     outputStyle:'expanded',
 //     prefix:'/css'
 // }))
+const flash=require('connect-flash');
+const customMware=require('./config/middleware')
 app.use(express.urlencoded());
 app.use(cookieParser());
 
@@ -56,6 +58,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
+//use flash meassage
+app.use(flash());
+// use middleware jo ki congfig me hai
+app.use(customMware.setFlash);
 //use express routes
 app.use('/',require('./routes'));
 
