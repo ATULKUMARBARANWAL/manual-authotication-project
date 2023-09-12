@@ -18,7 +18,7 @@ module.exports.create = function (req, res) {
 
           post.comments.push(comment);
           post.save();
-
+          req.flash('success','Commented');
           res.redirect('/');
       });
     }
@@ -37,13 +37,16 @@ try{
     let postId=comment.post;
     await comment.remove();
     await Post.findByIdAndUpdate(postId,{$pull:{comment:req.params.id}})
+    req.flash('success','Comment has been deleted');
    return res.redirect('back');
   }
   else{
+    req.flash('success','You cant able to delete comment');
     return res.redirect.status(404).send('not authorize user!')
   }
 }
 catch{
+  req.flash('error')
   return res.status(500).send('Internal Server Error'); 
 }
 }

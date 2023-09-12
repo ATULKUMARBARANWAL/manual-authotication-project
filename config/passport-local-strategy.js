@@ -4,21 +4,22 @@ const User=require('../models/user');
 
 //authentication using passport
 passport.use(new LocalStratgey({
-    usernameField:'email'
+    usernameField:'email',
+    passReqToCallback:true  //this for the adding more flashes
 },
-function(email,password,done)  //done is function
+function(req,email,password,done)  //done is function
 {
 //find user and establish the identity
 User.findOne({email:email}, function(err,user)
 {
     if(err)
     {
-        console.log('Error in finding User-->Passport');
+        req.flash('error',err);//this for the adding more flashes
     return done(err);
     }
     if(!user||user.password!=password)
     {
-      console.log('Invalid username/password');
+        req.flash('error','Invalid Username/Password');//this for the adding more flashes
       return done(null,false);//error is null but user is not there
     }
     return done(null,user);
