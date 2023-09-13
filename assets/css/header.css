@@ -1,5 +1,16 @@
-#header{
+#header li{
     height:20px;
     width:100%;
     background-color: brown;
+}
+/* header ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+} */
+li a{
+    background-color: rgb(31, 31, 31);
+}
+#sign-in{
+    margin-left: 40%px;
 }

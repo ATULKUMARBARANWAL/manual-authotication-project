@@ -1,14 +1,14 @@
-<link rel="stylesheet" href="a.css">
+<link rel="stylesheet" href="/css/header.css">
 <header id="header">
   <ul>
     <% if(locals.user){%>
     <li><%= user.name %></li> 
     <li>
-      <a href="/users/sign-out">Sign-Out</a>
+      <a href="/users/sign-out" >Sign-Out</a>
     </li>
     <% }else{ %>
         <li>
-            <a href="/users/sign-in">Sign-in</a>
+            <a href="/users/sign-in" id="sign-in">Sign-in</a>
         
         </li>
         <li>
