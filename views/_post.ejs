@@ -1,13 +1,13 @@
-<ul>
+<ul id="post-<%=post._id%>">  <!--id is for deleting the post -->
       
     <%for(post of posts){%>
       <li>
         <p>
           <%if(locals.user && locals.user.id==post.user.id){%>
           <small>
-            <a href="/posts/destroy/<%= post.id %>">
-              <!-- <i class="fa-duotone fa-delete-right"></i>
-               -->
+            <a href="/posts/destroy/<%= post.id %>" class="delete-post-button">    <!--  for attach common styling and add click listinor to it-->
+             <!--   <i class="fa-duotone fa-delete-right"></i> -->
+              
                X
             </a>
           </small><%}%>

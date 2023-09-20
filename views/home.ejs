@@ -12,8 +12,12 @@
   </form>
   <%}%>
   <div id="posts-list-container">
-    <%-include('_post')-%>
-  
+    <ul>
+      <%for(post of posts){%>
+        <%-include('_post')-%>
+        <%}%>
+    
+  </ul>
 </section>
 <section id="user-friends">
 <h4>Friends</h4>
