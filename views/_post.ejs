@@ -1,7 +1,7 @@
-<ul id="post-<%=post._id%>">  <!--id is for deleting the post -->
+<ul id="bla-bla">  <!--id is for deleting the post -->
       
     <%for(post of posts){%>
-      <li>
+      <li id="post-<%=post._id%>">
         <p>
           <%if(locals.user && locals.user.id==post.user.id){%>
           <small>

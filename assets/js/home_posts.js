@@ -10,8 +10,9 @@ console.log("helllo");
         url: "/posts/create",
         data: newPostForm.serialize(),
         success: function (data) {
-          let newPostDom=newPostDom(data.data.post);
-          $('#posts-list-container').prepend(newPost);
+          let newPostdom=newPostDom(data.data.post);
+          console.log(data.data.post);
+          $('#bla-bla').prepend(newPostdom);
         },
         error: function (error) {
           console.log(error.responseText);
@@ -22,14 +23,14 @@ console.log("helllo");
   //method to create a post in DOM
   //creating a function in dom for converting html part which we have copy from _post.ejs to DOM
   let newPostDom = function (post) {
-    return $(` <ul id="post-${post._id}">  // id is for deleting the post 
+    return $(`   
       
-        <%for(post of posts){%>
+       
           <li>
             <p>
              
               <small>
-                    <a href="/posts/destroy/${ post.id }" class="delete-post-button"> //for attach common styling and add click listinor to it
+                    <a href="/posts/destroy/${ post.id }" class="delete-post-button">
                   <!-- <i class="fa-duotone fa-delete-right"></i>
                    -->
                    X
