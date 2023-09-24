@@ -6,20 +6,21 @@ console.log("helllo");
     newPostForm.submit(function (e) {
       e.preventDefault();
       $.ajax({
-        type: "post",
-        url: "/posts/create",
+        type: 'post',
+        url: '/posts/create',
         data: newPostForm.serialize(),
         success: function (data) {
           let newPostdom=newPostDom(data.data.post);
           console.log(data.data.post);
-          $('#bla-bla').prepend(newPostdom);
+          $('#posts-list-container>ul').prepend(newPostdom);
+          deletePOST($(' .delete-post-button'),newPostdom)
         },
         error: function (error) {
           console.log(error.responseText);
-        },
+        }
       });
     });
-  };
+  }
   //method to create a post in DOM
   //creating a function in dom for converting html part which we have copy from _post.ejs to DOM
   let newPostDom = function (post) {
@@ -30,7 +31,7 @@ console.log("helllo");
             <p>
              
               <small>
-                    <a href="/posts/destroy/${ post.id }" class="delete-post-button">
+                    <a href="/posts/destroy/${ post._id }" class="delete-post-button">
                   <!-- <i class="fa-duotone fa-delete-right"></i>
                    -->
                    X
@@ -50,7 +51,7 @@ console.log("helllo");
                   name="content"
                   placeholder="write comment here..." required
                 />
-                <input type="hidden" name="post" value="${ post.id }" />
+                <input type="hidden" name="post" value="${ post._id }" />
                 <input type="submit" name="Add Comment" />
               </form>
               
@@ -61,6 +62,28 @@ console.log("helllo");
             </div>
           </li>`);
   };
+
+  let deletePOST=function(deleteLink)
+  {
+    $(deleteLink).click(function(e)
+    {
+      e.preventDefault();
+
+      $.ajax({
+        type:'get',
+        url:$(deleteLink).prop('href'),
+        success: function(data)
+        {
+          $(`#post-${data.data.post_id}`).remove();
+
+        },error:function(error)
+        {
+         
+          console.log(error.responseText);
+        }
+      });
+    });
+  }
 
   createPost();
 }

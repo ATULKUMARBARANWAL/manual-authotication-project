@@ -51,6 +51,15 @@ module.exports.destroy = async function (req, res) {
     if (post.user.toString() === req.user.id) {
       await post.remove();
       await Comment.deleteMany({ post: req.params.id });
+      if(req.xhr)
+      {
+        return res.status(200).json({
+          data:{
+            post_id:'#blabla'
+          },
+          message:"Post Deleted"
+        })
+      }
       req.flash('success','Post Deleted')
       return res.redirect("back");
     } else {
@@ -58,7 +67,8 @@ module.exports.destroy = async function (req, res) {
       return res.status(403).send("You are not authorized to delete this post");
     }
   } catch (err) {
-    req.flashe('error');
+    req.flash('error');
+    console.log(err);
     return res.status(500).send("Internal Server Error"); // Handle other errors
   }
 };

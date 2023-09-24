@@ -1,38 +1,36 @@
-<ul id="bla-bla">  <!--id is for deleting the post -->
-      
-    <%for(post of posts){%>
-      <li id="post-<%=post._id%>">
-        <p>
-          <%if(locals.user && locals.user.id==post.user.id){%>
-          <small>
-            <a href="/posts/destroy/<%= post.id %>" class="delete-post-button">    <!--  for attach common styling and add click listinor to it-->
-             <!--   <i class="fa-duotone fa-delete-right"></i> -->
-              
-               X
-            </a>
-          </small><%}%>
-          <%=post.content %>
-          <br />
-          <small> <%= post.user.name %></small>
-        </p>
+<!--id is for deleting the post -->
+<link rel="stylesheet" href="/css/post.css">
+<script src="https://kit.fontawesome.com/a429e5bfb6.js" crossorigin="anonymous"></script>
+<li id="post-<%=post._id%>">
+  <p>
+    <%if (locals.user && locals.user.id==post.user.id){%>
+    <small>
+      <a href="/posts/destroy/<%= post.id %>" class="delete-post-button">
+       <span class="delete-logo"> <i class="fa-regular fa-trash-can"></i></span>
+      </a> </small
+    ><%}%> <%= post.content %>
+    <br />
+    <small class="user_name"> <%= post.user.name %></small>
+  </p>
 
-        <div class="post-comments">
-          <% if(locals.user){%>
+  <div class="post-comments">
+    <% if(locals.user){%>
 
-          <form action="/comments/create" method="POST">
-            <input
-              type="text"
-              name="content"
-              placeholder="write comment here..." required
-            />
-            <input type="hidden" name="post" value="<%= post.id %>" />
-            <input type="submit" name="Add Comment" />
-          </form>
-          <% } %>
-          <div class="post-comments-list">
-         <%-include('_comment')-%>
-          </div>
-        </div>
-      </li>
-      <%}%>
-    </ul>
+    <form action="/comments/create" method="POST">
+      <input
+        type="text"
+        name="content"
+        placeholder="write comment here..."
+        required
+      />
+      <input type="hidden" name="post" value="<%= post._id %>" />
+      <input type="submit" name="Add Comment" />
+    </form>
+    <% } %>
+    <div class="post-comments-list">
+      <ul id="post-comments-<%= post._id %>">
+       <%- include('_comment') -%> 
+      </ul>
+    </div>
+  </div>
+</li>
