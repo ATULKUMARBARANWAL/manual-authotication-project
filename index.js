@@ -10,6 +10,8 @@ const passport =require('passport');
 const passportLocal=require('./config/passport-local-strategy');
 const { connect } = require('http2');
 const MongoStore=require('connect-mongo');
+//make upload paths availabel to browser
+app.use('/uploads',express.static(__dirname+'/uploads'));
 app.use(expressLayouts);
 // const sassMiddleware=require('node-sass-middleware');
 // app.use(sassMiddleware({
