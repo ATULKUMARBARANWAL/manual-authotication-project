@@ -1,6 +1,7 @@
 body {
     background-color: lightblue; }
     img{
+        margin-top: 2%;
         border-radius: 50%;
     }
   h3{
