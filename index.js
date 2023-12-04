@@ -8,6 +8,7 @@ const expressLayouts=require('express-ejs-layouts');
 const session=require('express-session');
 const passport =require('passport');
 const passportLocal=require('./config/passport-local-strategy');
+const passportJWT=require('./config/passport-jwt-strategy');
 const { connect } = require('http2');
 const MongoStore=require('connect-mongo');
 //make upload paths availabel to browser
